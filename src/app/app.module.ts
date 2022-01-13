@@ -10,6 +10,9 @@ import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
 import { MenuItemComponent } from './components/menu-item/menu-item.component';
 import { SubMenuComponent } from './pages/sub-menu/sub-menu.component';
 import { BlankComponent } from './pages/blank/blank.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { DropdownMenuComponent } from './components/dropdown/dropdown-menu/dropdown-menu.component';
+import { MessagesComponent } from './layout/header/messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,9 @@ import { BlankComponent } from './pages/blank/blank.component';
     MenuItemComponent,
     SubMenuComponent,
     BlankComponent,
+    DropdownComponent,
+    DropdownMenuComponent,
+    MessagesComponent,
   ],
   imports: [
     OverlayscrollbarsModule,
