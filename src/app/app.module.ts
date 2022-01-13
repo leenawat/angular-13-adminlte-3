@@ -13,6 +13,7 @@ import { BlankComponent } from './pages/blank/blank.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { DropdownMenuComponent } from './components/dropdown/dropdown-menu/dropdown-menu.component';
 import { MessagesComponent } from './layout/header/messages/messages.component';
+import { NotificationsComponent } from './layout/header/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MessagesComponent } from './layout/header/messages/messages.component';
     DropdownComponent,
     DropdownMenuComponent,
     MessagesComponent,
+    NotificationsComponent,
   ],
   imports: [
     OverlayscrollbarsModule,
