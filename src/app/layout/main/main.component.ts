@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-main-full',
-  templateUrl: './main-full.component.html',
-  styleUrls: ['./main-full.component.css']
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.css']
 })
-export class MainFullComponent implements OnInit {
+export class MainComponent implements OnInit {
   public sidebarMenuOpened = true;
   public menu = MENU;
 
