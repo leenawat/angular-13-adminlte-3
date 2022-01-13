@@ -2,5 +2,16 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
-    "eslint.validate": ["typescript", "typescriptreact"]
+    "[javascript]": { "editor.formatOnSave": true },
+    "eslint.validate": [
+        "typescript",
+        "typescriptreact",
+        "html",
+        "css",
+        "typescriptangular"
+    ],
+    "editor.tabSize": 2,
+    "eslint.options": {
+        "extensions": [".ts", ".html"]
+    },
 }
