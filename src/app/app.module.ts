@@ -7,6 +7,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { MainComponent } from './main/main.component';
 import { MainFullComponent } from './main/main-full.component';
 import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
+import { MenuItemComponent } from './components/menu-item/menu-item.component';
+import { SubMenuComponent } from './pages/sub-menu/sub-menu.component';
+import { BlankComponent } from './pages/blank/blank.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +17,9 @@ import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
     LoginComponent,
     MainComponent,
     MainFullComponent,
+    MenuItemComponent,
+    SubMenuComponent,
+    BlankComponent,
   ],
   imports: [
     OverlayscrollbarsModule,

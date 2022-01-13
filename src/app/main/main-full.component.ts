@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainFullComponent implements OnInit {
   public sidebarMenuOpened = true;
+  public menu = MENU;
 
   constructor() { }
 
@@ -26,3 +27,28 @@ export class MainFullComponent implements OnInit {
   }
 
 }
+
+export const MENU = [
+  {
+    name: 'Dashboard',
+    path: ['/']
+  },
+  {
+    name: 'Blank',
+    path: ['/blank']
+  },
+  {
+    name: 'Main Menu',
+    children: [
+      {
+        name: 'Sub Menu 1',
+        path: ['/sub-menu-1']
+      },
+
+      {
+        name: 'Sub Menu 2',
+        path: ['/sub-menu-2']
+      }
+    ]
+  }
+];
