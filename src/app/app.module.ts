@@ -15,7 +15,10 @@ import { MessagesComponent } from './layout/header/messages/messages.component';
 import { NotificationsComponent } from './layout/header/notifications/notifications.component';
 import { UserComponent } from './layout/header/user/user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HomeComponent } from './component/home/home.component';
+import { ErrorInterceptor } from './error.interceptor';
+import { PermissionDeniedComponent } from './pages/permission-denied/permission-denied.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
     MessagesComponent,
     NotificationsComponent,
     UserComponent,
+    HomeComponent,
+    PermissionDeniedComponent,
   ],
   imports: [
     OverlayscrollbarsModule,
@@ -39,7 +44,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,7 +12,7 @@ export class AuthService {
   public currentUser: Observable<User>;
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') || ''));
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') || null as any));
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -38,8 +38,9 @@ export class AuthService {
   }
 
   logout() {
-    this.http.post('http://localhost:8000/api/logout', {}, { withCredentials: true })
     this.currentUserSubject.next(null as any);
+    localStorage.removeItem('currentUser')
+    this.http.post('http://localhost:8000/api/logout', {}, { withCredentials: true }).toPromise()
   }
 
   isAuthorized() {
