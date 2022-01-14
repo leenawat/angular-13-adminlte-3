@@ -14,6 +14,8 @@ import { DropdownMenuComponent } from './components/dropdown/dropdown-menu/dropd
 import { MessagesComponent } from './layout/header/messages/messages.component';
 import { NotificationsComponent } from './layout/header/notifications/notifications.component';
 import { UserComponent } from './layout/header/user/user.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,10 @@ import { UserComponent } from './layout/header/user/user.component';
   imports: [
     OverlayscrollbarsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
