@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,6 +19,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { PermissionDeniedComponent } from './pages/permission-denied/permission-denied.component';
 import { SubMenuComponent } from './pages/sub-menu/sub-menu.component';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -35,14 +37,14 @@ import { SubMenuComponent } from './pages/sub-menu/sub-menu.component';
     UserComponent,
     HomeComponent,
     PermissionDeniedComponent,
+    RegisterComponent
   ],
   imports: [
-    OverlayscrollbarsModule,
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    OverlayscrollbarsModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },],
   bootstrap: [AppComponent]

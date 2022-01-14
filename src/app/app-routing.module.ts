@@ -8,6 +8,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { Role } from './model/Role';
 import { HomeComponent } from './pages/home/home.component';
 import { PermissionDeniedComponent } from './pages/permission-denied/permission-denied.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,9 @@ const routes: Routes = [
   }, {
     path: 'login',
     component: LoginComponent,
+  }, {
+    path: 'register',
+    component: RegisterComponent,
   },
   { path: '**', redirectTo: '' }
 ];

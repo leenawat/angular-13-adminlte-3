@@ -34,7 +34,8 @@ export class LoginComponent implements OnInit {
     const credential: Credential = this.form.getRawValue();
     const result = await this.authService.login(credential)
 
-    if (result?.message === "success") {
+    console.log({result})
+    if (result?.message === "success" || result?.access_token) {
       await this.authService.getUser()
     }
 

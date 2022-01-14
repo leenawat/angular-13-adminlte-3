@@ -10,7 +10,10 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
   private currentUserSubject: BehaviorSubject<User | null>;
-  public currentUser: Observable<User | null>;
+  public currentUser: Observable<User | null>; // ไว้ให้ คลาสอื่นเรียกใช้ แบบ subscribe
+
+  private currentRoleSubject: BehaviorSubject<string[] | null>;
+  public currentRole: Observable<string[] | null>; //  ไว้ให้ คลาสอื่นเรียกใช้ แบบ subscribe
 
   constructor(private http: HttpClient) {
     const localUser = localStorage.getItem('currentUser');
@@ -24,6 +27,9 @@ export class AuthService {
     }
     this.currentUserSubject = new BehaviorSubject<User | null>(localUserParsed)
     this.currentUser = this.currentUserSubject.asObservable();
+
+    this.currentRoleSubject = new BehaviorSubject<string[] | null>(null);
+    this.currentRole = this.currentRoleSubject.asObservable();
   }
 
   // getter เรียกใช้โดย เรียก userService.currentUserValue ไม่ต้องใส่ ()
@@ -31,8 +37,12 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  public get currentRoleValue(): string[] | null {
+    return this.currentRoleSubject.value;
+  }
+
   async getUser(): Promise<void> {
-    const user = await this.http.get<User>(`${environment.apiUrl}/api/user`, {
+    const user = await this.http.get<User>(`${environment.apiUrl}/api/auth/user`, {
       withCredentials: true
     }).toPromise()
     localStorage.setItem('currentUser', JSON.stringify(user));
@@ -41,7 +51,15 @@ export class AuthService {
   }
 
   async login(credential: Credential): Promise<any> {
-    const result = await this.http.post<any>(`${environment.apiUrl}/api/login`, credential, {
+    const result = await this.http.post<any>(`${environment.apiUrl}/api/auth/login`, credential, {
+      withCredentials: true
+    }).toPromise()
+    return result;
+  }
+
+
+  async register(body: any): Promise<any> {
+    const result = await this.http.post<any>(`${environment.apiUrl}/api/auth/register`, body, {
       withCredentials: true
     }).toPromise()
     return result;
@@ -50,7 +68,7 @@ export class AuthService {
   logout(): void {
     this.currentUserSubject.next(null);
     localStorage.removeItem('currentUser')
-    this.http.post(`${environment.apiUrl}/api/logout`, {}, { withCredentials: true }).toPromise()
+    this.http.post(`${environment.apiUrl}/api/auth/logout`, {}, { withCredentials: true }).toPromise()
   }
 
   isAuthorized(): boolean {
