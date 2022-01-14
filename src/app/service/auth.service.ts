@@ -8,16 +8,16 @@ import { Role } from '../model/Role';
   providedIn: 'root'
 })
 export class AuthService {
-  private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
+  private currentUserSubject: BehaviorSubject<User | null>;
+  public currentUser: Observable<User | null>;
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') || null as any));
+    this.currentUserSubject = new BehaviorSubject<User | null>(JSON.parse(localStorage.getItem('currentUser') || ''));
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
   // getter เรียกใช้โดย เรียก userService.currentUserValue ไม่ต้องใส่ ()
-  public get currentUserValue(): User {
+  public get currentUserValue(): User | null {
     return this.currentUserSubject.value;
   }
 
@@ -27,7 +27,7 @@ export class AuthService {
     }).toPromise()
     localStorage.setItem('currentUser', JSON.stringify(user));
     console.log([user?.roles])
-    this.currentUserSubject.next(user || null as any);
+    this.currentUserSubject.next(user || null);
   }
 
   async login(credential: Credential) {
@@ -38,7 +38,7 @@ export class AuthService {
   }
 
   logout() {
-    this.currentUserSubject.next(null as any);
+    this.currentUserSubject.next(null);
     localStorage.removeItem('currentUser')
     this.http.post('http://localhost:8000/api/logout', {}, { withCredentials: true }).toPromise()
   }
@@ -48,6 +48,6 @@ export class AuthService {
   }
 
   hasRole(role: Role) {
-    return this.isAuthorized() && (this.currentUserValue.roles?.indexOf(role) !== -1);
+    return this.isAuthorized() && (this.currentUserValue?.roles?.indexOf(role) !== -1);
   }
 }

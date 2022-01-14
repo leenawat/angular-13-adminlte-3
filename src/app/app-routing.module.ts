@@ -6,7 +6,7 @@ import { SubMenuComponent } from './pages/sub-menu/sub-menu.component';
 import { BlankComponent } from './pages/blank/blank.component';
 import { AuthGuard } from './guard/auth.guard';
 import { Role } from './model/Role';
-import { HomeComponent } from './component/home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 import { PermissionDeniedComponent } from './pages/permission-denied/permission-denied.component';
 
 const routes: Routes = [
