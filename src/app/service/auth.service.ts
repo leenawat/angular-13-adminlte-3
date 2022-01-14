@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../model/User';
 import { HttpClient } from '@angular/common/http';
 import { Role } from '../model/Role';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,16 @@ export class AuthService {
   public currentUser: Observable<User | null>;
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<User | null>(JSON.parse(localStorage.getItem('currentUser') || ''));
+    const localUser = localStorage.getItem('currentUser');
+    let localUserParsed = null;
+    if (localUser) {
+      try {
+        localUserParsed = JSON.parse(localUser);
+      } catch (err) {
+        localUserParsed = null;
+      }
+    }
+    this.currentUserSubject = new BehaviorSubject<User | null>(localUserParsed)
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -21,8 +31,8 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  async getUser() {
-    const user = await this.http.get<User>('http://localhost:8000/api/user', {
+  async getUser(): Promise<void> {
+    const user = await this.http.get<User>(`${environment.apiUrl}/api/user`, {
       withCredentials: true
     }).toPromise()
     localStorage.setItem('currentUser', JSON.stringify(user));
@@ -30,24 +40,24 @@ export class AuthService {
     this.currentUserSubject.next(user || null);
   }
 
-  async login(credential: Credential) {
-    const result = await this.http.post<any>('http://localhost:8000/api/login', credential, {
+  async login(credential: Credential): Promise<any> {
+    const result = await this.http.post<any>(`${environment.apiUrl}/api/login`, credential, {
       withCredentials: true
     }).toPromise()
     return result;
   }
 
-  logout() {
+  logout(): void {
     this.currentUserSubject.next(null);
     localStorage.removeItem('currentUser')
-    this.http.post('http://localhost:8000/api/logout', {}, { withCredentials: true }).toPromise()
+    this.http.post(`${environment.apiUrl}/api/logout`, {}, { withCredentials: true }).toPromise()
   }
 
-  isAuthorized() {
+  isAuthorized(): boolean {
     return !!this.currentUserValue;
   }
 
-  hasRole(role: Role) {
+  hasRole(role: Role): boolean {
     return this.isAuthorized() && (this.currentUserValue?.roles?.indexOf(role) !== -1);
   }
 }
