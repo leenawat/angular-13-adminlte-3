@@ -9,6 +9,7 @@ import { Role } from '@app/model/Role';
 import { HomeComponent } from '@app/pages/home/home.component';
 import { PermissionDeniedComponent } from '@app/pages/permission-denied/permission-denied.component';
 import { RegisterComponent } from '@app/pages/register/register.component';
+import { DocsComponent } from '@app/pages/docs/docs.component';
 
 const routes: Routes = [
   {
@@ -18,32 +19,38 @@ const routes: Routes = [
     data: { roles: [Role.Admin, Role.User] },
     children: [
       {
-          path: '',
-          component: HomeComponent,
-          canActivate: [AuthGuard],
-          data: { roles: [Role.Admin, Role.User] }
+        path: '',
+        component: HomeComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin, Role.User] }
       },
       {
-          path: 'blank',
-          component: BlankComponent,
-          canActivate: [AuthGuard],
-          data: { roles: [Role.Admin, Role.User] }
+        path: 'blank',
+        component: BlankComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin, Role.User] }
       },
       {
-          path: 'sub-menu-1',
-          canActivate: [AuthGuard],
-          component: SubMenuComponent,
-          data: { roles: [Role.Admin] }
+        path: 'docs',
+        component: DocsComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin, Role.User] }
       },
       {
-          path: 'sub-menu-2',
-          canActivate: [AuthGuard],
-          component: BlankComponent,
-          data: { roles: [Role.User] }
+        path: 'sub-menu-1',
+        canActivate: [AuthGuard],
+        component: SubMenuComponent,
+        data: { roles: [Role.Admin] }
       },
       {
-          path: 'permission-denied',
-          component: PermissionDeniedComponent,
+        path: 'sub-menu-2',
+        canActivate: [AuthGuard],
+        component: BlankComponent,
+        data: { roles: [Role.User] }
+      },
+      {
+        path: 'permission-denied',
+        component: PermissionDeniedComponent,
       },
     ]
   }, {

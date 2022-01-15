@@ -27,6 +27,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    document.querySelector('body')?.removeAttribute('class');
+    document.querySelector('body')?.classList.add('hold-transition', 'login-page');
+    
   }
 
   async submit() {

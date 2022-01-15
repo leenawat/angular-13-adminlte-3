@@ -9,19 +9,14 @@ import Validation from '@app/utils/validation';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  form: FormGroup = new FormGroup({
-    fullname: new FormControl(''),
-    username: new FormControl(''),
-    email: new FormControl(''),
-    password: new FormControl(''),
-    confirmPassword: new FormControl(''),
-    acceptTerms: new FormControl(false),
-  });
+  form: FormGroup;
   submitted = false;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService) {}
 
   ngOnInit(): void {
+    document.querySelector('body')?.removeAttribute('class');
+    document.querySelector('body')?.classList.add('hold-transition', 'register-page');
     this.form = this.formBuilder.group(
       {
         fullname: ['leenawat', Validators.required],

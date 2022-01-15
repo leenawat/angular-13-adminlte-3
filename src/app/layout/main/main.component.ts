@@ -12,6 +12,8 @@ export class MainComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    document.querySelector('body')?.removeAttribute('class');
+    document.querySelector('body')?.classList.add('sidebar-mini','sidebar-open','layout-fixed');
   }
 
   toggleMenuSidebar() {
@@ -31,20 +33,31 @@ export class MainComponent implements OnInit {
 export const MENU = [
   {
     name: 'Dashboard',
-    path: ['/']
+    path: ['/'],
+    icon: 'fa-tachometer-alt'
   },
   {
     name: 'Blank',
     path: ['/blank']
   },
   {
-    name: 'Main Menu',
+    name: 'Administration',
+    icon: 'fa-users-cog',
     children: [
+      {
+        name: 'User management',
+        path: ['/user-management'],
+        icon: 'fa-users-cog',
+      },
+      {
+        name: 'API',
+        path: ['/docs'],
+        icon: 'fa-book',
+      },
       {
         name: 'Sub Menu 1',
         path: ['/sub-menu-1']
       },
-
       {
         name: 'Sub Menu 2',
         path: ['/sub-menu-2']

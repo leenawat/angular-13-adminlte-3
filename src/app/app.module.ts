@@ -19,6 +19,7 @@ import { PermissionDeniedComponent } from '@app/pages/permission-denied/permissi
 import { SubMenuComponent } from '@app/pages/sub-menu/sub-menu.component';
 import { RegisterComponent } from '@app/pages/register/register.component';
 import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
+import { DocsComponent } from './pages/docs/docs.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
     UserComponent,
     HomeComponent,
     PermissionDeniedComponent,
-    RegisterComponent
+    RegisterComponent,
+    DocsComponent
   ],
   imports: [
     BrowserModule,
