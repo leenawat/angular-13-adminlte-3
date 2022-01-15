@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 // import {AppService} from '@services/app.service';
 import { DateTime } from 'luxon';
-import { AuthService } from '../../../service/auth.service';
+import { AuthService } from '@app/service/auth.service';
 
 @Component({
   selector: 'app-user',

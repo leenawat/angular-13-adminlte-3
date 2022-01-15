@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BlankComponent } from './blank.component';
+import { BlankComponent } from '@app/pages/blank/blank.component';
 
 describe('BlankComponent', () => {
   let component: BlankComponent;

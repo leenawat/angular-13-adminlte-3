@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PermissionDeniedComponent } from './permission-denied.component';
+import { PermissionDeniedComponent } from '@app/pages/permission-denied/permission-denied.component';
 
 describe('PermissionDeniedComponent', () => {
   let component: PermissionDeniedComponent;

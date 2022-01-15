@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SubMenuComponent } from './sub-menu.component';
+import { SubMenuComponent } from '@app/pages/sub-menu/sub-menu.component';
 
 describe('SubMenuComponent', () => {
   let component: SubMenuComponent;

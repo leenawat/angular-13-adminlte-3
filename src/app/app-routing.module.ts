@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
-import { MainComponent } from './layout/main/main.component';
-import { SubMenuComponent } from './pages/sub-menu/sub-menu.component';
-import { BlankComponent } from './pages/blank/blank.component';
-import { AuthGuard } from './guard/auth.guard';
-import { Role } from './model/Role';
-import { HomeComponent } from './pages/home/home.component';
-import { PermissionDeniedComponent } from './pages/permission-denied/permission-denied.component';
-import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from '@app/pages/login/login.component';
+import { MainComponent } from '@app/layout/main/main.component';
+import { SubMenuComponent } from '@app/pages/sub-menu/sub-menu.component';
+import { BlankComponent } from '@app/pages/blank/blank.component';
+import { AuthGuard } from '@app/guard/auth.guard';
+import { Role } from '@app/model/Role';
+import { HomeComponent } from '@app/pages/home/home.component';
+import { PermissionDeniedComponent } from '@app/pages/permission-denied/permission-denied.component';
+import { RegisterComponent } from '@app/pages/register/register.component';
 
 const routes: Routes = [
   {
