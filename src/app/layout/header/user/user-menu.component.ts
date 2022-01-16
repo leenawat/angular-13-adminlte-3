@@ -4,11 +4,11 @@ import { DateTime } from 'luxon';
 import { AuthService } from '@app/service/auth.service';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  selector: 'app-user-menu',
+  templateUrl: './user-menu.component.html',
+  styleUrls: ['./user-menu.component.css']
 })
-export class UserComponent implements OnInit {
+export class UserMenuComponent implements OnInit {
   public user: any;
 
   constructor(

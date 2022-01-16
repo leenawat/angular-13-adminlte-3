@@ -47,7 +47,7 @@ export const MENU = [
       {
         name: 'User management',
         path: ['/user-management'],
-        icon: 'fa-users-cog',
+        icon: 'fa-users',
       },
       {
         name: 'API',

@@ -1,0 +1,20 @@
+<p>user-management works!</p><p>Table is just a mapping of objects to table rows with <code>ngFor</code></p>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Country</th>
+    <th scope="col">Area</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of users; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>{{ user.name }}</td>
+    <td>{{ user.email  }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<div *ngFor="let user of users; index as i">{{ i + 1 }} {{ user.name }} {{ user.email }}</div>

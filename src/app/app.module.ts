@@ -1,6 +1,6 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/app.component';
@@ -10,7 +10,7 @@ import { MenuItemComponent } from '@app/components/menu-item/menu-item.component
 import { ErrorInterceptor } from '@app/error.interceptor';
 import { MessagesComponent } from '@app/layout/header/messages/messages.component';
 import { NotificationsComponent } from '@app/layout/header/notifications/notifications.component';
-import { UserComponent } from '@app/layout/header/user/user.component';
+import { UserMenuComponent } from '@app/layout/header/user/user-menu.component';
 import { MainComponent } from '@app/layout/main/main.component';
 import { BlankComponent } from '@app/pages/blank/blank.component';
 import { HomeComponent } from '@app/pages/home/home.component';
@@ -20,6 +20,8 @@ import { SubMenuComponent } from '@app/pages/sub-menu/sub-menu.component';
 import { RegisterComponent } from '@app/pages/register/register.component';
 import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
 import { DocsComponent } from './pages/docs/docs.component';
+import { CommonModule } from '@angular/common';
+import { UserManagementComponent } from './pages/user-management/user-management.component';
 
 
 @NgModule({
@@ -34,17 +36,19 @@ import { DocsComponent } from './pages/docs/docs.component';
     DropdownMenuComponent,
     MessagesComponent,
     NotificationsComponent,
-    UserComponent,
+    UserMenuComponent,
     HomeComponent,
     PermissionDeniedComponent,
     RegisterComponent,
-    DocsComponent
+    DocsComponent,
+    UserManagementComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
+    FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     OverlayscrollbarsModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },],

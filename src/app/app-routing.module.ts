@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from '@app/pages/login/login.component';
-import { MainComponent } from '@app/layout/main/main.component';
-import { SubMenuComponent } from '@app/pages/sub-menu/sub-menu.component';
-import { BlankComponent } from '@app/pages/blank/blank.component';
 import { AuthGuard } from '@app/guard/auth.guard';
+import { MainComponent } from '@app/layout/main/main.component';
 import { Role } from '@app/model/Role';
+import { BlankComponent } from '@app/pages/blank/blank.component';
+import { DocsComponent } from '@app/pages/docs/docs.component';
 import { HomeComponent } from '@app/pages/home/home.component';
+import { LoginComponent } from '@app/pages/login/login.component';
 import { PermissionDeniedComponent } from '@app/pages/permission-denied/permission-denied.component';
 import { RegisterComponent } from '@app/pages/register/register.component';
-import { DocsComponent } from '@app/pages/docs/docs.component';
+import { SubMenuComponent } from '@app/pages/sub-menu/sub-menu.component';
+import { UserManagementComponent } from './pages/user-management/user-management.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
     component: MainComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.Admin, Role.User] },
+  
     children: [
       {
         path: '',
@@ -29,6 +31,12 @@ const routes: Routes = [
         component: BlankComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin, Role.User] }
+      },
+      {
+        path: 'user-management',
+        component: UserManagementComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin] }
       },
       {
         path: 'docs',
