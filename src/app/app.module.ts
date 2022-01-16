@@ -16,11 +16,11 @@ import { BlankComponent } from '@app/pages/blank/blank.component';
 import { HomeComponent } from '@app/pages/home/home.component';
 import { LoginComponent } from '@app/pages/login/login.component';
 import { PermissionDeniedComponent } from '@app/pages/permission-denied/permission-denied.component';
-import { SubMenuComponent } from '@app/pages/sub-menu/sub-menu.component';
 import { RegisterComponent } from '@app/pages/register/register.component';
+import { SubMenuComponent } from '@app/pages/sub-menu/sub-menu.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
 import { DocsComponent } from './pages/docs/docs.component';
-import { CommonModule } from '@angular/common';
 import { UserManagementComponent } from './pages/user-management/user-management.component';
 
 
@@ -50,6 +50,7 @@ import { UserManagementComponent } from './pages/user-management/user-management
     ReactiveFormsModule,
     HttpClientModule,
     OverlayscrollbarsModule,
+    NgbModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },],
   bootstrap: [AppComponent]
