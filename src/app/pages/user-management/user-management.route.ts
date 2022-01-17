@@ -8,19 +8,20 @@ import {
 import { Observable, of } from 'rxjs';
 import { UserManagementUpdateComponent } from './update/user-management-update.component';
 import { UserManagementComponent } from './user-management.component';
+import { UserManagementService } from './service/user-management.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserManagementResolver implements Resolve<boolean> {
+  constructor(private userManagementService: UserManagementService) {
+
+  }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
     const id = route.params['login'];
+    console.log('resolve')
     if (id) {
-      return of({
-        id,
-        email: 'user@email.com',
-        name: 'Dr Nice'
-      })
+      return this.userManagementService.find(id);
     }
     return of({
       email: '',

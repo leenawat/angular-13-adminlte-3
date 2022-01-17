@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserManagementDeleteDialogComponent } from './delete/user-management-delete-dialog.component';
+import { UserManagementService } from './service/user-management.service';
 
 @Component({
   selector: 'app-user-management',
@@ -10,7 +11,7 @@ import { UserManagementDeleteDialogComponent } from './delete/user-management-de
 })
 export class UserManagementComponent implements OnInit {
 
-  constructor(private modalService: NgbModal) {
+  constructor(private modalService: NgbModal, private userManagementService: UserManagementService) {
     this.refreshUsers();
   }
 
@@ -20,14 +21,16 @@ export class UserManagementComponent implements OnInit {
     { id: 13, name: 'Bombasto', email: 'user2@email.com' },
     { id: 14, name: 'Celeritas', email: 'user2@email.com' },
   ];
-  
+
   page = 1;
   pageSize = 4;
   collectionSize = this.users.length;
   filter = new FormControl('');
 
   ngOnInit(): void {
+    this.loadAll();
   }
+
 
   refreshUsers() {
     // this.countries = COUNTRIES
@@ -46,5 +49,15 @@ export class UserManagementComponent implements OnInit {
     });
   }
 
-  loadAll(): void {}
+  loadAll(): void {
+    // this.isLoading = true;
+    this.userManagementService.query().subscribe({
+      next: (res: any) => {
+        console.log(res)
+        this.users = res
+      },
+      error: (e) => console.log(e)
+    }
+    )
+  }
 }
