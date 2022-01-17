@@ -13,15 +13,18 @@ import { NotificationsComponent } from '@app/layout/header/notifications/notific
 import { UserMenuComponent } from '@app/layout/header/user/user-menu.component';
 import { MainComponent } from '@app/layout/main/main.component';
 import { BlankComponent } from '@app/pages/blank/blank.component';
+import { DocsComponent } from '@app/pages/docs/docs.component';
 import { HomeComponent } from '@app/pages/home/home.component';
 import { LoginComponent } from '@app/pages/login/login.component';
 import { PermissionDeniedComponent } from '@app/pages/permission-denied/permission-denied.component';
 import { RegisterComponent } from '@app/pages/register/register.component';
 import { SubMenuComponent } from '@app/pages/sub-menu/sub-menu.component';
+import { UserManagementComponent } from '@app/pages/user-management/user-management.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
-import { DocsComponent } from './pages/docs/docs.component';
-import { UserManagementComponent } from './pages/user-management/user-management.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { UserManagementUpdateComponent } from './pages/user-management/update/user-management-update.component';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -40,17 +43,13 @@ import { UserManagementComponent } from './pages/user-management/user-management
     HomeComponent,
     PermissionDeniedComponent,
     RegisterComponent,
-    DocsComponent,
-    UserManagementComponent
+    DocsComponent
   ],
   imports: [
     BrowserModule,
+    SharedModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    OverlayscrollbarsModule,
-    NgbModule,
+    HttpClientModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },],
   bootstrap: [AppComponent]

@@ -33,8 +33,7 @@ const routes: Routes = [
         data: { roles: [Role.Admin, Role.User] }
       },
       {
-        path: 'user-management',
-        component: UserManagementComponent,
+        path: 'user-management',loadChildren: () => import('./pages/user-management/user-management.module').then(m => m.UserManagementModule),
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin] }
       },

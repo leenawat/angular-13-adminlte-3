@@ -14,4 +14,13 @@
     "eslint.options": {
         "extensions": [".ts", ".html"]
     },
+    "workbench.colorCustomizations": {
+        "titleBar.activeBackground": "#970505",
+        "titleBar.inactiveBackground": "#970505",
+        "titleBar.activeForeground": "#FFFFFF",
+        "statusBar.background": "#970505",
+        "statusBar.debuggingBackground": "#970505",
+        "statusBar.noFolderBackground": "#970505",
+        "statussBar.prominentBackground": "#970505"
+      },
 }

@@ -31,3 +31,14 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 But don't just use filter(e => e is NavigationEnd)
 https://stackoverflow.com/a/54336566/2462784
+
+## ref:
+- https://www.npmjs.com/package/@fortawesome/angular-fontawesome
+- https://www.npmjs.com/package/@fortawesome/fontawesome-svg-core
+- https://www.npmjs.com/package/@fortawesome/free-solid-svg-icons
+- https://www.npmjs.com/package/@fortawesome/free-regular-svg-icons
+
+## ค้นหา font awesome free
+- https://fontawesome.com/v5.15/icons?d=gallery&p=2&s=regular&m=free
+- คลิกเลือก free
+- คลิกเลือก Solid หรือ Regular
