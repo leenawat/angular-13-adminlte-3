@@ -1,6 +1,7 @@
+import { registerLocaleData } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import localeThai from '@angular/common/locales/th';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/app.component';
@@ -19,11 +20,12 @@ import { LoginComponent } from '@app/pages/login/login.component';
 import { PermissionDeniedComponent } from '@app/pages/permission-denied/permission-denied.component';
 import { RegisterComponent } from '@app/pages/register/register.component';
 import { SubMenuComponent } from '@app/pages/sub-menu/sub-menu.component';
-import { UserManagementComponent } from '@app/pages/user-management/user-management.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { UserManagementUpdateComponent } from './pages/user-management/update/user-management-update.component';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { NgbCalendar, NgbCalendarBuddhist, NgbDateAdapter, NgbDateParserFormatter, NgbDatepickerConfig, NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
+import { fontAwesomeIcons } from './config/font-awesome-icons';
+import { CustomNgbDateAdapter } from './shared/custom-ngb-date-adapter';
+import { CustomNgbDateParserFormatter } from './shared/custom-ngb-date-parser-formatter';
+import { CustomNgbDatepickerI18n } from './shared/custom-ngb-datepicker-i18n';
 import { SharedModule } from './shared/shared.module';
 
 
@@ -51,7 +53,21 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: NgbDateAdapter, useClass: CustomNgbDateAdapter },
+    { provide: NgbCalendar, useClass: NgbCalendarBuddhist },
+    { provide: NgbDateParserFormatter, useClass: CustomNgbDateParserFormatter },
+    { provide: NgbDatepickerI18n, useClass: CustomNgbDatepickerI18n },
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(iconLibrary: FaIconLibrary, dpConfig: NgbDatepickerConfig) {
+    iconLibrary.addIcons(...fontAwesomeIcons);
+    registerLocaleData(localeThai);
+    // year ต้องใส่ ปี พ.ศ. เพราะ NgbCalendarBuddhist จะใช้ค่าเป็น พศ. ทั้งหมดเลย ทั้งรับ และส่ง
+    // * ดังนั้นหากจะนำมาใช้ต้อง + - 543 เอง ส่วนปฎิทินนั้นจะไม่ผิดเพี้ยน แต่ต้องใส่ ค่า พ.ศ. แทน คศ.
+    dpConfig.minDate = { year: (new Date().getFullYear() + 543) - 100, month: 1, day: 1 };
+  }
+}

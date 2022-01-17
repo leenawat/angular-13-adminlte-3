@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserManagementDeleteDialogComponent } from './delete/user-management-delete-dialog.component';
 
 @Component({
   selector: 'app-user-management',
@@ -7,6 +9,11 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./user-management.component.css']
 })
 export class UserManagementComponent implements OnInit {
+
+  constructor(private modalService: NgbModal) {
+    this.refreshUsers();
+  }
+
   users = [
     { id: 11, name: 'Dr Nice', email: 'user1@email.com' },
     { id: 12, name: 'Narco', email: 'user2@email.com' },
@@ -19,10 +26,6 @@ export class UserManagementComponent implements OnInit {
   collectionSize = this.users.length;
   filter = new FormControl('');
 
-  constructor() {
-    this.refreshUsers();
-  }
-
   ngOnInit(): void {
   }
 
@@ -32,4 +35,16 @@ export class UserManagementComponent implements OnInit {
     //   .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 
+  deleteUser(user: any): void {
+    const modalRef = this.modalService.open(UserManagementDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.user = user;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed.subscribe(reason => {
+      if (reason === 'deleted') {
+        this.loadAll();
+      }
+    });
+  }
+
+  loadAll(): void {}
 }

@@ -3,6 +3,7 @@
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <h2 id="myUserLabel">Create or edit a User</h2>
 
+      {{ user | json}}
       <div *ngIf="user">
 
         <div class="form-group" [hidden]="!user.id">
@@ -19,7 +20,18 @@
           <label class="form-control-label">Email</label>
           <input type="email" class="form-control" name="email" formControlName="email" />
         </div>
-
+        <div class="form-group">
+          <label class="form-control-label">วันเกิด</label>
+          <div class="input-group">
+            <input class="form-control" placeholder="วว/ดด/ปปปป" name="dp" formControlName="dateOfBirth" ngbDatepicker
+              #d="ngbDatepicker" [maxDate]="{year: 2565, month: 1, day: 17}">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div *ngIf="user">
