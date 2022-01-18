@@ -42,3 +42,8 @@ https://stackoverflow.com/a/54336566/2462784
 - https://fontawesome.com/v5.15/icons?d=gallery&p=2&s=regular&m=free
 - คลิกเลือก free
 - คลิกเลือก Solid หรือ Regular
+
+
+https://www.bezkoder.com/angular-13-crud-example/
+
+- [Angular Add Debounce Time using RxJS  to Optimize Search Input](https://www.freakyjolly.com/angular-rxjs-debounce-time-optimize-search-for-server-response/)

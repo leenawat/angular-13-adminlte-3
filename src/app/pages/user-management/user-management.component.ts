@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {
+  debounceTime,
+  map,
+  distinctUntilChanged,
+  filter
+} from "rxjs";
 import { UserManagementDeleteDialogComponent } from './delete/user-management-delete-dialog.component';
 import { UserManagementService } from './service/user-management.service';
 
@@ -25,9 +31,63 @@ export class UserManagementComponent implements OnInit {
   page = 1;
   pageSize = 4;
   collectionSize = this.users.length;
+  isSearching = false;
   filter = new FormControl('');
 
   ngOnInit(): void {
+    this.filter.valueChanges.pipe(
+
+      // get value
+      map((value: any) => {
+        this.isSearching = true;
+        console.log({ value, date: new Date() })
+        // return event.target.value;
+        return value;
+      })
+      // if character length greater then 2
+      , filter(res => res.length > 2)
+
+      // Time in milliseconds between key events
+      , debounceTime(250)
+
+      // If previous query is diffent from current   
+      , distinctUntilChanged()
+
+    ).subscribe((text: string) => {
+
+      // this.searchGetCall(text).subscribe((res) => {
+      //   console.log('res', res);
+      //   this.isSearching = false;
+      //   this.apiResponse = res;
+      // }, (err) => {
+      //   this.isSearching = false;
+      //   console.log('error', err);
+      // });
+      // setTimeout(()=> {
+      console.log({ text: 'time out ' + text, date: new Date() })
+      this.userManagementService.query({
+        query: text,
+        page: 1,
+        size: 5,
+        sort: ['id,asc']
+      })
+        .subscribe({
+          next: (res) => {
+            console.log('res', res);
+            this.isSearching = false;
+            this.users = res
+          },
+          error: (err) => {
+            console.log(err)
+
+            this.isSearching = false;
+            console.log('error', err);
+          }
+        })
+      this.isSearching = false;
+      // }, 2000)
+
+    });
     this.loadAll();
   }
 
@@ -51,7 +111,12 @@ export class UserManagementComponent implements OnInit {
 
   loadAll(): void {
     // this.isLoading = true;
-    this.userManagementService.query().subscribe({
+    this.userManagementService.query({
+      query: '',
+      page: 0,
+      size: 5,
+      sort: ['id,asc']
+    }).subscribe({
       next: (res: any) => {
         console.log(res)
         this.users = res

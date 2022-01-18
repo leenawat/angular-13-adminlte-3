@@ -17,6 +17,13 @@
       </div>
       <div>
         <form>
+          <div class="row" *ngIf="isSearching">
+            <div class="col-12 text-center">
+
+              <h4>Searching ... </h4>
+
+            </div>
+          </div>
           <div class="form-group form-inline">
             search: <input class="form-control ml-2" type="text" [formControl]="filter" />
           </div>
@@ -45,7 +52,7 @@
                   <span class="d-none d-md-inline ml-1">View</span>
                 </button>
 
-                <button type="submit" class="btn btn-primary btn-sm"  [routerLink]="[user.id,'edit']">
+                <button type="submit" class="btn btn-primary btn-sm" [routerLink]="[user.id,'edit']">
                   <i class="fa fa-pencil-alt"></i>
                   <span class="d-none d-md-inline ml-1">Edit</span>
                 </button>
