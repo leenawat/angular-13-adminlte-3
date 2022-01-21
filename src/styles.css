@@ -121,3 +121,18 @@
     margin-right: 0;
     margin-left: -8px;
 }
+
+.ngb-dp-weekday, .ngb-dp-week-number {
+    font-style: normal !important;
+}
+  
+.ngb-dp-weekday {
+/* color: var(--info); */
+    color: var(--primary) !important;
+}
+
+[ngbDatepickerDayView] {
+    /* border-radius: .25rem; */
+    border-radius: 50% !important;
+}
+  
