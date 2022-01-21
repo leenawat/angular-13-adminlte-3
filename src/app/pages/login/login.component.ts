@@ -16,31 +16,25 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authService: AuthService) {
     this.form = this.formBuilder.group({
-      email: '',
-      password: ''
+      email: 'leenawat.pa@gmail.com',
+      password: 'nestAbcd123$'
     });
-    authService.currentUser.subscribe(user => {
-      if (user) {
-        this.router.navigate(['/']);
-      }
-    })
+    // authService.currentUser.subscribe(user => {
+    //   if (user) {
+    //     this.router.navigate(['/']);
+    //   }
+    // })
   }
 
   ngOnInit(): void {
     document.querySelector('body')?.removeAttribute('class');
     document.querySelector('body')?.classList.add('hold-transition', 'login-page');
-    
+
   }
 
-  async submit() {
+  submit() {
     console.log('submit')
     const credential: Credential = this.form.getRawValue();
-    const result = await this.authService.login(credential)
-
-    console.log({result})
-    if (result?.message === "success" || result?.access_token) {
-      await this.authService.getUser()
-    }
-
+    this.authService.login(credential)
   }
 }

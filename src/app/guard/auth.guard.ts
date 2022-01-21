@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '@app/service/auth.service';
+import { tap } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -11,32 +12,32 @@ export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
     private authService: AuthService
-  ) {
-    authService.currentUser.subscribe(user => {
-      console.log({ app: 'AuthGuard', user })
-      this.currentUser = user
-    })
-  }
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (this.currentUser) {
-      // logged in so return true
-      console.log({ route })
-      console.log({ routeRoles: route.data['roles'], userRoles: this.currentUser.roles })
-      if (!this.isAuthorized(route.data['roles'], this.currentUser.roles as string[])) {
-        // not logged in so redirect to login page with the return url
-        this.router.navigate(['/permission-denied'], { queryParams: { returnUrl: state.url } });
-        return false;
-      }
-      return true;
-    }
-
-    // not logged in so redirect to login page with the return url
-    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-    return false;
+    return this.authService.isLoggedIn$().pipe(
+      tap(isLoggedIn => {
+        console.log({ isLoggedIn })
+        if (!isLoggedIn) { this.router.navigate(['/login']); }
+      }),
+      tap(isLoggedIn => {
+        console.log({ isLoggedIn2: isLoggedIn })
+        this.authService.getCurrentUser().subscribe({
+          next: (user) => {
+            if (!this.isAuthorized(route.data['roles'], user.roles as string[])) {
+              // not logged in so redirect to login page with the return url
+              this.router.navigate(['/permission-denied'], { queryParams: { returnUrl: state.url } });
+            }
+          },
+          error: (e) => {
+            console.log(e)
+          }
+        })
+      })
+    );
   }
 
   isAuthorized(allowedRoles: string[], userRoles: string[]): boolean {

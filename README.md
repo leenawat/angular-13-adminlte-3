@@ -47,3 +47,5 @@ https://stackoverflow.com/a/54336566/2462784
 https://www.bezkoder.com/angular-13-crud-example/
 
 - [Angular Add Debounce Time using RxJS  to Optimize Search Input](https://www.freakyjolly.com/angular-rxjs-debounce-time-optimize-search-for-server-response/)
+- [Angular User Login and Registration Guide (Cookies and JWT)](https://dev-academy.com/angular-user-login-and-registration-guide-cookies-and-jwt/)
+- [bartosz-io/budget-angular](https://github.com/bartosz-io/budget-angular)
